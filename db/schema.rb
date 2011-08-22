@@ -12,20 +12,25 @@
 
 ActiveRecord::Schema.define(:version => 0) do
 
-  create_table "customers", :force => true do |t|
-    t.text "metadata"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "places", :force => true do |t|
-    t.text "metadata"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "products", :force => true do |t|
-    t.text "metadata"
+  create_table "movies", :force => true do |t|
+    t.integer "flixster_id"
+    t.integer "imdb_id"
+    t.string "title"
+    t.string "genres"
+    t.text "synopsis"
+    t.string "mpaa_rating"
+    t.integer "runtime"
+    t.string "studio"
+    t.string "director"
+    t.string "critics_consensus"
+    t.string "critics_rating"
+    t.integer "critics_score"
+    t.string "audience_rating"
+    t.integer "audience_score"
+    t.string "poster_thumbnail"
+    t.string "poster_profile"
+    t.string "poster_detailed"
+    t.string "poster_original"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

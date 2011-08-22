@@ -2,15 +2,16 @@ source 'http://rubygems.org'
 
 gem 'thin'
 gem 'heroku'
-
+gem 'mysql2'
 gem 'rails', '3.1.0.rc5'
+
+# App Gems
+gem 'typhoeus'
+gem 'json'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 # gem 'sqlite3'
-gem 'mysql2'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
