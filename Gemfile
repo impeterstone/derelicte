@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'thin'
 gem 'heroku'
 gem 'mysql2'
-gem 'rails', '3.1.0.rc5'
+gem 'rails', '3.1.0.rc6'
 
 # App Gems
 gem 'typhoeus'
