@@ -13,8 +13,11 @@ class UserController < ApplicationController
     udid = params['udid']
     facebook_id = params['facebook_id']
     facebook_name = params['facebook_name']
-    query = "INSERT INTO users (udid, facebook_access_token, facebook_id, facebook_name) VALUES ('#{udid}', '#{facebook_access_token}', '#{facebook_id}', '#{facebook_name}') ON DUPLICATE KEY UPDATE udid = '#{udid}', facebook_access_token = '#{facebook_access_token}'"
+    time_now = Time.now.utc.to_s(:db)
+    query = "INSERT INTO users (udid, facebook_access_token, facebook_id, facebook_name, created_at, updated_at) VALUES ('#{udid}', '#{facebook_access_token}', '#{facebook_id}', '#{facebook_name}', '#{time_now}', '#{time_now}') ON DUPLICATE KEY UPDATE udid = '#{udid}', facebook_access_token = '#{facebook_access_token}', updated_at = '#{time_now}'"
     mysqlresult = ActiveRecord::Base.connection.execute(query)
+    
+    render :json => "OK", :status => :success
     
   end
   
