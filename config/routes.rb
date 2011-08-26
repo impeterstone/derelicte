@@ -1,4 +1,7 @@
 Derelicte::Application.routes.draw do
+  
+  match ':version/users', :to => 'user#new', :via => ["post"]  # CREATE: Register new user with access_token
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
