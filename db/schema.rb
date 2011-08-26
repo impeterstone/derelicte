@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "movies", ["flixster_id"], :name => "idx_unique_flixster_id", :unique => true
 
   create_table "users", :force => true do |t|
+    t.string "facebook_access_token"
+    t.string "facebook_id"
+    t.string "facebook_name"
+    t.string "udid"
     t.text "metadata"
     t.datetime "joined_at"
     t.datetime "created_at"
