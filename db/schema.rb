@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "updated_at"
   end
   
-  add_index "photos", ["photos_src"], :name => "idx_unique_photos_src", :unique => true
+  add_index "photos", ["src"], :name => "idx_unique_photos_src", :unique => true
   
   create_table "places", :force => true do |t|
     t.string "biz"
@@ -83,16 +83,21 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "updated_at"
   end
   
-  add_index "places", ["places_biz"], :name => "idx_unique_places_biz", :unique => true
+  add_index "places", ["biz"], :name => "idx_unique_places_biz", :unique => true
 
   create_table "reviews", :force => true do |t|
     t.string "srid"
+    t.string "biz"
+    t.decimal "rating"
+    t.string "date"
     t.string "comment"
-    t.integer "width"
-    t.integer "height"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
   
-  add_index "reviews", ["reviews_srid"], :name => "idx_unique_reviews_srid", :unique => true
+  add_index "reviews", ["srid"], :name => "idx_unique_reviews_srid", :unique => true
+  
+  create_table "dumps", :force => true do |t|
+    t.text "metadata"
+  end
 end
