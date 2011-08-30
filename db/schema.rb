@@ -52,5 +52,47 @@ ActiveRecord::Schema.define(:version => 0) do
   end
   
   add_index "users", ["facebook_id"], :name => "idx_unique_facebook_id", :unique => true
+  
+  create_table "photos", :force => true do |t|
+    t.string "biz"
+    t.string "src"
+    t.string "caption"
+    t.integer "width"
+    t.integer "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+  
+  add_index "photos", ["photos_src"], :name => "idx_unique_photos_src", :unique => true
+  
+  create_table "places", :force => true do |t|
+    t.string "biz"
+    t.string "name"
+    t.decimal "rating"
+    t.string "phone"
+    t.integer "numreviews"
+    t.string "price"
+    t.string "category"
+    t.string "city"
+    t.string "address"
+    t.string "coordinates"
+    t.string "hours"
+    t.integer "numphotos"
+    t.decimal "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+  
+  add_index "places", ["places_biz"], :name => "idx_unique_places_biz", :unique => true
 
+  create_table "reviews", :force => true do |t|
+    t.string "srid"
+    t.string "comment"
+    t.integer "width"
+    t.integer "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+  
+  add_index "reviews", ["reviews_srid"], :name => "idx_unique_reviews_srid", :unique => true
 end

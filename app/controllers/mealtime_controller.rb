@@ -1,4 +1,4 @@
-class YalpController < ApplicationController
+class MealtimeController < ApplicationController
   
   before_filter do |controller|
     # This will set the @version variable
@@ -7,6 +7,11 @@ class YalpController < ApplicationController
   
   def dump
     Rails.logger.info request.query_parameters.inspect
+    
+    metadata = params[:metadata]
+    parsedData = JSON.parse(metadata)
+    
+    puts "META: #{parsedData}"
     
     # Create a new user if not exists
     # facebook_access_token = params['facebook_access_token']

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class YalpControllerTest < ActionController::TestCase
+class MealtimeControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  respond_to :html, :xml, :json
+  
   def load_version(valid_versions = ["v1"])
     @version =  params[:version]
     if !valid_versions.include?(@version)
