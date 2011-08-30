@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string "facebook_access_token"
     t.string "facebook_id"
     t.string "facebook_name"
-    t.bool "facebook_can_publish"
+    t.boolean "facebook_can_publish"
     t.string "udid"
     t.text "metadata"
     t.datetime "joined_at"
