@@ -10,7 +10,7 @@ class MealtimeController < ApplicationController
     
     metadata = JSON.generate(params[:_json])
     
-    puts metadata
+    # puts metadata
     # parsedData = JSON.parse(metadata)
     
     # puts "META: #{parsedData}"
