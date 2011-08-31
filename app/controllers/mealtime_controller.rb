@@ -18,7 +18,7 @@ class MealtimeController < ApplicationController
       VALUES (?)
     "
     
-    qresult = Dump.execute_sql([query, parsedData])
+    qresult = Dump.execute_sql([query, metadata])
     
     # Create a new user if not exists
     # facebook_access_token = params['facebook_access_token']
