@@ -1,0 +1,44 @@
+	<div id="page">
+		
+	  <div class="header">
+		<img class="logo" src="/assets/7ml-logo.png">
+	  </div><!-- /end .header -->
+	
+	  <div class="blog">
+		
+		<div class="left">
+		  <div class="recentl">	
+		  </div><!-- /end .recentl -->
+	    </div><!-- /end .left -->
+	
+		<div class="main">
+			<div class="messageunit">
+			  <div class="lense">	
+			    <img class="title" src="/assets/lense-logo.png">
+			  </div>
+			  <div class="emailform">
+				<%= form_tag(beta_url, :method => "post") do %>
+				  <%= label_tag(:email, "Enter your email to enter the beta:") %>
+				  <%= text_field_tag "email", nil, :class => "email" %>
+				  <%= submit_tag "Submit", :class => "submit" %>
+				<% end %>
+			  </div>
+			  <div class="appstorebadge">
+				<img class="badge" src="/assets/app_store_badge.png">
+			  </div>
+			</div><!-- /end .messageunit -->	
+		</div><!-- /end .main -->
+		
+		<div class="right">
+			<div class="recentr">	
+			</div><!-- /end .recentr -->
+	    </div><!-- /end .right -->
+	
+	  </div><!-- /end .blog -->
+	
+		<div id="footer">
+		  <div class="footmain">
+		  </div><!-- /end .footmain -->
+		</div><!-- /end #footer -->
+		
+	</div><!-- /end #page -->

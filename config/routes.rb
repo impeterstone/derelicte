@@ -6,6 +6,9 @@ Derelicte::Application.routes.draw do
 
   match ':version/mealtime_parsed', :to => 'mealtime#dump_parsed', :via => ["post","get"] # MealTime app client dumps go here  
   
+  match 'beta' => 'home#beta', :as => :beta
+  
+  root :to => 'home#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
