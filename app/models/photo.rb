@@ -23,12 +23,12 @@ class Photo < ActiveRecord::Base
     #       
     #     end
     
-    columns = [:biz, :src, :caption, :created_at, :updated_at]
+    columns = [:biz, :src, :caption]
     values = []
     photos['photos'].each do |photo|
-      values << [biz, photo['src'], photo['caption'], created_at, updated_at]
+      values << [biz, photo['src'], photo['caption']]
     end
-    Photo.import columns, values, :on_duplicate_key_update => [:src, :caption, :updated_at]
+    Photo.import columns, values, :on_duplicate_key_update => [:caption]
 
   end
   

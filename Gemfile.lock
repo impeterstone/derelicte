@@ -25,6 +25,9 @@ GEM
       activesupport (= 3.1.0.rc8)
       arel (~> 2.2.1)
       tzinfo (~> 0.3.29)
+    activerecord-import (0.2.8)
+      activerecord (~> 3.0pre)
+      activerecord (~> 3.0pre)
     activeresource (3.1.0.rc8)
       activemodel (= 3.1.0.rc8)
       activesupport (= 3.1.0.rc8)
@@ -149,6 +152,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import (>= 0.2.0)
   coffee-rails (~> 3.1.0.rc)
   heroku
   jquery-rails

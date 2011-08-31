@@ -36,42 +36,25 @@ class MealtimeController < ApplicationController
       row = parsed_response
 
       if row['type']=='places'
-
         row['data']['places'].each do |place|
           place_json = JSON.generate place
           Place.create_from_json(place_json)
         end
-
       elsif row['type']=='photos'
-
         row['biz']
         row['numphotos']
         row['data']['biz'] = row['biz']
         photo_json = JSON.generate row['data']
         Photo.create_from_json(photo_json)
-
       elsif row['type']=='biz'
-
         row['data']['biz'] = row['biz']
         place_json = JSON.generate row['data']
         Place.create_from_biz_json(place_json)
         row['timestamp']
-
       elsif row['type']=='reviews'
-        row['data']['reviews'].each do |review|
-          # review_hash = {}
-          # review_hash['biz'] = row['biz']
-          # review_hash['srid'] = review['srid']
-          # review_hash['rating'] = review['rating']
-          # review_hash['comment'] = review['comment']
-          # review_hash['date'] = review['date']
-          # review_json = JSON.generate review_hash
-          review['biz'] = row['biz']
-          review_json = JSON.generate review
-          Review.create_from_json(review_json)          
-        end
-        row['timestamp']
-
+        row['data']['biz'] = row['biz']
+        review_json = JSON.generate row['data']
+        Review.create_from_json(review_json)
       else
         # ignore unknown response
       end
@@ -102,45 +85,33 @@ class MealtimeController < ApplicationController
     row = parsed_response
       
     if row['type']=='places'
-      
+
       row['data']['places'].each do |place|
         place_json = JSON.generate place
         Place.create_from_json(place_json)
       end
-      
+
     elsif row['type']=='photos'
-      
+
       row['biz']
       row['numphotos']
       row['data']['biz'] = row['biz']
       photo_json = JSON.generate row['data']
       Photo.create_from_json(photo_json)
-      
+
     elsif row['type']=='biz'
-      
+
       row['data']['biz'] = row['biz']
       place_json = JSON.generate row['data']
       Place.create_from_biz_json(place_json)
       row['timestamp']
-      
+
     elsif row['type']=='reviews'
-      # row['data']['reviews'].each do |review|
-      #   # review_hash = {}
-      #   # review_hash['biz'] = row['biz']
-      #   # review_hash['srid'] = review['srid']
-      #   # review_hash['rating'] = review['rating']
-      #   # review_hash['comment'] = review['comment']
-      #   # review_hash['date'] = review['date']
-      #   # review_json = JSON.generate review_hash
-      #   review['biz'] = row['biz']
-      #   review_json = JSON.generate review
-      #   Review.create_from_json(review_json)          
-      # end
-      # row['timestamp']
+      
       row['data']['biz'] = row['biz']
       review_json = JSON.generate row['data']
       Review.create_from_json(review_json)
-  
+
     else
       # ignore unknown response
     end

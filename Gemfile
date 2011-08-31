@@ -12,6 +12,7 @@ gem 'rails', '3.1.0.rc8'
 # App Gems
 gem 'typhoeus'
 gem 'json'
+gem "activerecord-import", ">= 0.2.0"
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
