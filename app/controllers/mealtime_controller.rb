@@ -6,24 +6,34 @@ class MealtimeController < ApplicationController
   end
   
   def dump
+    Rails.logger.info request.query_parameters.inspect
     
-    metadata = JSON.generate(params[:_json])
-    
-    # puts metadata
-    # parsedData = JSON.parse(metadata)
-    
-    # puts "META: #{parsedData}"
-    
-    query = "
-      INSERT INTO dumps (metadata)
-      VALUES (?)
-    "
-    
-    response = {}
     begin
-      qresult = Dump.execute_sql([query, metadata])
+      jsonData = nil
+      parsedData = nil
+      
+      # We should expect this to be gzip, but it might be text
+      encoding = request.headers["Content-Encoding"]
+      if encoding.include? "gzip"
+        Rails.logger.info "Detected gzip response"
+        jsonData = Zlib::GzipReader.new(StringIO.new(request.body.read)).read
+        parsedData = JSON.parse(jsonData)
+      else
+        Rails.logger.info "Detected text response"
+        jsonData = request.body.read
+        parsedData = JSON.parse(jsonData)
+      end
+    
+      query = "
+        INSERT INTO dumps (metadata)
+        VALUES (?)
+      "
+      qresult = Dump.execute_sql([query, jsonData])
+            
+      response = {}
       response['status'] = "success"
     rescue => e
+      Rails.logger.info e.inspect
       response['status'] = "fail"
     end
     
