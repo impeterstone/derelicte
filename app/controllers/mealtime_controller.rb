@@ -32,6 +32,7 @@ class MealtimeController < ApplicationController
       qresult = Dump.execute_sql([query, jsonData])
       response['status'] = "success"
     rescue => e
+      Rails.logger.info e.inspect
       response['status'] = "fail"
     end
     
