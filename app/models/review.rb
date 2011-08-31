@@ -19,7 +19,7 @@ class Review < ActiveRecord::Base
     
     
     data = JSON.parse params_json
-    columns = [:biz, :srid, :rating, :comment, :date, :created_at, :updated_at]
+    columns = [:biz, :srid, :rating, :comment, :date]
     values = []
     data['reviews'].each do |review|
       # review_hash = {}
@@ -29,11 +29,11 @@ class Review < ActiveRecord::Base
       # review_hash['comment'] = review['comment']
       # review_hash['date'] = review['date']
       # review_json = JSON.generate review_hash
-      review['biz'] = row['biz']
-      values << review         
+      review['biz'] = data['biz']
+      values << [data['biz'], review['srid'], review['rating'], review['comment'], review['date']]
     end
 
-    Review.import columns, values, :on_duplicate_key_update => [:biz, :rating, :comment, :date, :updated_at]
+    Review.import columns, values, :on_duplicate_key_update => [:biz, :rating, :comment, :date]
     
   end
   

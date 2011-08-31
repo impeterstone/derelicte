@@ -38,13 +38,12 @@ class Place < ActiveRecord::Base
     end
     
     bizDetails_json = JSON.generate place['bizDetails']
-    bizcategories_json = JSON.generate place['bizcategories']
-    
+
     query = "
-      REPLACE INTO places (biz, address, city, state, zip, longitude, latitude, country, category, bizinfo, created_at, updated_at)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+      REPLACE INTO places (biz, address, city, state, zip, longitude, latitude, country, bizinfo, created_at, updated_at)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?)
     "
-    query = sanitize_sql_array([query, place['biz'], address, place['city'], place['state'], place['zip'], place['longitude'], place['latitude'], place['country'], bizcategories_json, bizDetails_json, created_at, updated_at])
+    query = sanitize_sql_array([query, place['biz'], address, place['city'], place['state'], place['zip'], place['longitude'], place['latitude'], place['country'], bizDetails_json, created_at, updated_at])
     qresult = ActiveRecord::Base.connection.execute(query)
     
   end
