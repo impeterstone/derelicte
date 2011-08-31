@@ -86,6 +86,10 @@ class MealtimeController < ApplicationController
       response['status'] = "fail"
     end
     
+    respond_to do |format|
+      format.json  { render :json => response }
+    end
+    
   end
   
   def dump_parsed
