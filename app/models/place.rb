@@ -20,12 +20,12 @@ class Place < ActiveRecord::Base
     # query = sanitize_sql_array([query, place['biz'], place['name'], place['score'], place['phone'], place['numreviews'], place['price'], place['category'], created_at, updated_at])
     # qresult = ActiveRecord::Base.connection.execute(query)
     
-    columns = [:biz, :name, :score, :phone, :numreviews, :price, :category]
+    columns = [:biz, :name, :score, :rating, :phone, :numreviews, :price, :category]
     values = []
     data['places'].each do |place|
-      values << [place['biz'], place['name'], place['score'], place['phone'], place['numreviews'], place['price'], place['category']]
+      values << [place['biz'], place['name'], place['score'], place['rating'], place['phone'], place['numreviews'], place['price'], place['category']]
     end
-    Place.import columns, values, :on_duplicate_key_update => [:name, :score, :phone, :numreviews, :price, :category]
+    Place.import columns, values, :on_duplicate_key_update => [:name, :score, :rating, :phone, :numreviews, :price, :category]
     
   end
   
