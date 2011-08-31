@@ -6,7 +6,7 @@ gem 'clockwork'
 gem 'resque'
 gem 'heroku'
 gem 'mysql2'
-gem 'rails', '3.1.0.rc8'
+gem 'rails', '3.1.0'
 
 # App Gems
 gem 'typhoeus'
@@ -20,8 +20,8 @@ gem "activerecord-import", ">= 0.2.0"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "~> 3.1.0.rc"
-  gem 'coffee-rails', "~> 3.1.0.rc"
+  gem 'sass-rails', "~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
 end
 
