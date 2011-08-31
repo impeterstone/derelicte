@@ -9,7 +9,8 @@ class UserJob < ActiveRecord::Base
       facebook_id = params['facebook_id']
       facebook_name = params['facebook_name']
       facebook_can_publish = params['facebook_can_publish']
-      time_now = Time.now.utc.to_s(:db)
+      created_at = Time.now.utc.to_s(:db)
+      updated_at = Time.now.utc.to_s(:db)
 
       query = "
         INSERT INTO users (udid, facebook_access_token, facebook_id, facebook_name, facebook_can_publish, created_at, updated_at) 
