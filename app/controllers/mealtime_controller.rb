@@ -118,19 +118,22 @@ class MealtimeController < ApplicationController
       row['timestamp']
       
     elsif row['type']=='reviews'
-      row['data']['reviews'].each do |review|
-        # review_hash = {}
-        # review_hash['biz'] = row['biz']
-        # review_hash['srid'] = review['srid']
-        # review_hash['rating'] = review['rating']
-        # review_hash['comment'] = review['comment']
-        # review_hash['date'] = review['date']
-        # review_json = JSON.generate review_hash
-        review['biz'] = row['biz']
-        review_json = JSON.generate review
-        Review.create_from_json(review_json)          
-      end
-      row['timestamp']
+      # row['data']['reviews'].each do |review|
+      #   # review_hash = {}
+      #   # review_hash['biz'] = row['biz']
+      #   # review_hash['srid'] = review['srid']
+      #   # review_hash['rating'] = review['rating']
+      #   # review_hash['comment'] = review['comment']
+      #   # review_hash['date'] = review['date']
+      #   # review_json = JSON.generate review_hash
+      #   review['biz'] = row['biz']
+      #   review_json = JSON.generate review
+      #   Review.create_from_json(review_json)          
+      # end
+      # row['timestamp']
+      row['data']['biz'] = row['biz']
+      review_json = JSON.generate row['data']
+      Review.create_from_json(review_json)
   
     else
       # ignore unknown response
