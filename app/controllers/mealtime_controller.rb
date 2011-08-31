@@ -6,7 +6,9 @@ class MealtimeController < ApplicationController
   end
   
   def dump
-    Rails.logger.info request.query_parameters.inspect
+    # Rails.logger.info request.query_parameters.inspect
+    
+    response = {}
     
     begin
       jsonData = nil
@@ -30,7 +32,7 @@ class MealtimeController < ApplicationController
       "
       qresult = Dump.execute_sql([query, jsonData])
             
-      response = {}
+
       response['status'] = "success"
     rescue => e
       Rails.logger.info e.inspect
