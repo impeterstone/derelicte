@@ -73,12 +73,14 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer "numreviews"
     t.string "price"
     t.string "category"
-    t.string "city"
-    t.string "address"
-    t.string "coordinates"
+    t.text "address"
+    t.decimal  "latitude",                              :precision => 20, :scale => 16
+    t.decimal  "longitude",                              :precision => 20, :scale => 16
     t.string "hours"
     t.integer "numphotos"
     t.decimal "score"
+    t.text "bizinfo"
+    t.text "snippets"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

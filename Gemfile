@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'thin'
+# gem 'thin'
+gem 'unicorn'
+gem 'resque'
+gem 'resque-scheduler'
+
 gem 'heroku'
 gem 'mysql2'
 gem 'rails', '3.1.0.rc8'
