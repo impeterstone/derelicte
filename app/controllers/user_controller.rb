@@ -12,6 +12,7 @@ class UserController < ApplicationController
     Resque.enqueue(UserJob, params)
     
     respond_to do |format|
+      format render :text => 'success'
       format.json  { render :json => {:status => 'success'} }
     end
     
