@@ -65,10 +65,9 @@ class MealtimeController < ApplicationController
       
     elsif row['type']=='biz'
       
-      row['biz']
-      row['data'].each do |bizdetail|
-        puts bizdetail
-      end
+      row['data']['biz'] = row['biz']
+      place_json = JSON.generate row['data']
+      Place.create_from_biz_json(place_json)
       row['timestamp']
       
     elsif row['type']=='reviews'
