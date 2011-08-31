@@ -93,7 +93,6 @@ class MealtimeController < ApplicationController
     elsif row['type']=='biz'
       row['data']['biz'] = row['biz']
       place_json = JSON.generate row['data']
-      puts place_json
       Place.create_from_biz_json(place_json)
       row['timestamp']
     elsif row['type']=='reviews'
