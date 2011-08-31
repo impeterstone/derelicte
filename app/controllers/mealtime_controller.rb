@@ -8,8 +8,8 @@ class MealtimeController < ApplicationController
   def dump
     Rails.logger.info request.query_parameters.inspect
     
-    metadata = params[:metadata]
-    parsedData = JSON.parse(metadata)
+    metadata = params[:_json]
+    # parsedData = JSON.parse(metadata)
     
     # puts "META: #{parsedData}"
     
@@ -18,7 +18,14 @@ class MealtimeController < ApplicationController
       VALUES (?)
     "
     
-    qresult = Dump.execute_sql([query, metadata])
+    response = {}
+    begin
+      qresult = Dump.execute_sql([query, metadata])
+      response['status'] = "success"
+    rescue => e
+      log e
+      response['status'] = "fail"
+    end
     
     # Create a new user if not exists
     # facebook_access_token = params['facebook_access_token']
@@ -30,7 +37,9 @@ class MealtimeController < ApplicationController
     # query = "INSERT INTO users (udid, facebook_access_token, facebook_id, facebook_name, facebook_can_publish, created_at, updated_at) VALUES ('#{udid}', '#{facebook_access_token}', '#{facebook_id}', '#{facebook_name}', '#{facebook_can_publish}', '#{time_now}', '#{time_now}') ON DUPLICATE KEY UPDATE udid = '#{udid}', facebook_access_token = '#{facebook_access_token}', facebook_can_publish = '#{facebook_can_publish}', updated_at = '#{time_now}'"
     # mysqlresult = ActiveRecord::Base.connection.execute(query)
     
-    render :text => qresult.nil?
+    respond_to do |format|
+      format.json  { render :json => response }
+    end
     
   end
   
