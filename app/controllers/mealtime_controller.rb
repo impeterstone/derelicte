@@ -8,7 +8,9 @@ class MealtimeController < ApplicationController
   def dump
     Rails.logger.info request.query_parameters.inspect
     
-    metadata = params[:_json]
+    metadata = JSON.generate(params[:_json])
+    
+    puts metadata
     # parsedData = JSON.parse(metadata)
     
     # puts "META: #{parsedData}"
@@ -23,7 +25,6 @@ class MealtimeController < ApplicationController
       qresult = Dump.execute_sql([query, metadata])
       response['status'] = "success"
     rescue => e
-      log e
       response['status'] = "fail"
     end
     
