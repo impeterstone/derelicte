@@ -34,10 +34,8 @@ class MealtimeController < ApplicationController
       row = parsed_response
 
       if row['type']=='places'
-        row['data']['places'].each do |place|
-          place_json = JSON.generate place
-          Place.create_from_json(place_json)
-        end
+        place_json = JSON.generate row['data']
+        Place.create_from_json(place_json)
       elsif row['type']=='photos'
         row['biz']
         row['numphotos']
@@ -77,35 +75,25 @@ class MealtimeController < ApplicationController
     parsed_response = JSON.parse params["_json"]
     
     row = parsed_response
-      
     if row['type']=='places'
-
-      row['data']['places'].each do |place|
-        place_json = JSON.generate place
-        Place.create_from_json(place_json)
-      end
-
+      place_json = JSON.generate row['data']
+      Place.create_from_json(place_json)
     elsif row['type']=='photos'
-
       row['biz']
       row['numphotos']
       row['data']['biz'] = row['biz']
       photo_json = JSON.generate row['data']
       Photo.create_from_json(photo_json)
-
     elsif row['type']=='biz'
-
       row['data']['biz'] = row['biz']
       place_json = JSON.generate row['data']
+      puts place_json
       Place.create_from_biz_json(place_json)
       row['timestamp']
-
     elsif row['type']=='reviews'
-      
       row['data']['biz'] = row['biz']
       review_json = JSON.generate row['data']
       Review.create_from_json(review_json)
-
     else
       # ignore unknown response
     end
