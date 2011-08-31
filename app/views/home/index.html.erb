@@ -19,7 +19,7 @@
 			  <div class="emailform">
 				<%= form_tag(beta_url, :remote => true, :method => "post") do %>
 				  <%= label_tag(:email, "Enter your email to enter the beta:") %>
-				  <%= text_field_tag "email", nil, :class => "email" %>
+				  <%= text_field_tag "email", nil, :type => "email", :class => "email" %>
 				  <%= submit_tag "Submit", :class => "submit"%>
 				<% end %>
 			  </div>
