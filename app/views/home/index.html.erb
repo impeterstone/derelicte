@@ -20,7 +20,7 @@
 				<%= form_tag(beta_url, :method => "post") do %>
 				  <%= label_tag(:email, "Enter your email to enter the beta:") %>
 				  <%= text_field_tag "email", nil, :class => "email" %>
-				  <%= submit_tag "Submit", :class => "submit" %>
+				  <%= submit_tag "Submit", :class => "submit", remote: true %>
 				<% end %>
 			  </div>
 			  <div class="appstorebadge">
