@@ -65,8 +65,10 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string   "price"
     t.string   "category"
     t.string   "city"
+    t.string   "state",      :limit => 45
     t.string   "country",    :limit => 45
     t.string   "address"
+    t.integer  "zip"
     t.decimal  "latitude",                 :precision => 20, :scale => 16
     t.decimal  "longitude",                :precision => 20, :scale => 16
     t.string   "hours"
