@@ -8,9 +8,8 @@ class UserController < ApplicationController
   def new
     Rails.logger.info request.query_parameters.inspect
     
-    # Create a new user if not exists
-    User.async(:logged_in, params)
-    # User.logged_in(params)
+    # A user has logged in to phototime
+    Resque.enqueue(UserJob, params)
     
     respond_to do |format|
       format.json  { render :json => {:status => 'success'} }
