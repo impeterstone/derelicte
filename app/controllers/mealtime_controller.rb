@@ -6,7 +6,6 @@ class MealtimeController < ApplicationController
   end
   
   def dump
-    Rails.logger.info request.query_parameters.inspect
     
     metadata = JSON.generate(params[:_json])
     
@@ -26,6 +25,59 @@ class MealtimeController < ApplicationController
       response['status'] = "success"
     rescue => e
       response['status'] = "fail"
+    end
+    
+  end
+  
+  def dump_parsed
+    Rails.logger.info request.query_parameters.inspect
+    
+    #puts params["_json"]
+    
+    parsed_response = JSON.parse params["_json"]
+    
+    row = parsed_response
+      
+    if row['type']=='places'
+      
+      row['data']['places'].each do |place|
+        place_json = JSON.generate place
+        Place.create_from_json(place_json)
+      end
+      
+    elsif row['type']=='photos'
+      
+      row['biz']
+      row['numphotos']
+      row['data']['biz'] = row['biz']
+      photo_json = JSON.generate row['data']
+      Photo.create_from_json(photo_json)
+      
+    elsif row['type']=='biz'
+      
+      row['biz']
+      row['data'].each do |bizdetail|
+        puts bizdetail
+      end
+      row['timestamp']
+      
+    elsif row['type']=='reviews'
+      row['data']['reviews'].each do |review|
+        # review_hash = {}
+        # review_hash['biz'] = row['biz']
+        # review_hash['srid'] = review['srid']
+        # review_hash['rating'] = review['rating']
+        # review_hash['comment'] = review['comment']
+        # review_hash['date'] = review['date']
+        # review_json = JSON.generate review_hash
+        review['biz'] = row['biz']
+        review_json = JSON.generate review
+        Review.create_from_json(review_json)          
+      end
+      row['timestamp']
+  
+    else
+      # ignore unknown response
     end
     
     # Create a new user if not exists

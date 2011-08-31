@@ -2,7 +2,9 @@ Derelicte::Application.routes.draw do
   
   match ':version/users', :to => 'user#new', :via => ["post"] # CREATE: Register new user with access_token
   
-  match ':version/mealtime', :to => 'mealtime#dump', :via => ["post"] # MealTime app client dumps go here
+  match ':version/mealtime', :to => 'mealtime#dump', :via => ["post","get"] # MealTime app client dumps go here
+
+  match ':version/mealtime_parsed', :to => 'mealtime#dump_parsed', :via => ["post","get"] # MealTime app client dumps go here  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
