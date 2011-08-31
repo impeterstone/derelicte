@@ -3,8 +3,8 @@
 <head>
   <title>Derelicte</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <%= stylesheet_link_tag 'assets/reset.css', :media => 'screen' %>
-  <%= stylesheet_link_tag 'assets/homeindex.css', :media => 'screen' %>
+  <%= stylesheet_link_tag 'reset.css', :media => 'screen' %>
+  <%= stylesheet_link_tag 'homeindex.css', :media => 'screen' %>
   <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css' />
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
@@ -13,6 +13,11 @@
   <script type="text/javascript" src="/assets/7minlabs.js"></script>
 </head>
 <body>
+	
+	<% if flash[:notice] %> 
+	<div id="notice"><%= flash[:notice] %></div>
+	<% end %>
+	
 <%= yield %>
 </body>
 </html>

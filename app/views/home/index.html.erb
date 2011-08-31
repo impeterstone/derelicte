@@ -17,10 +17,10 @@
 			    <img class="title" src="/assets/lense-logo.png">
 			  </div>
 			  <div class="emailform">
-				<%= form_tag(beta_url, :method => "post") do %>
+				<%= form_tag(beta_url, :remote => true, :method => "post") do %>
 				  <%= label_tag(:email, "Enter your email to enter the beta:") %>
 				  <%= text_field_tag "email", nil, :class => "email" %>
-				  <%= submit_tag "Submit", :class => "submit", remote: true %>
+				  <%= submit_tag "Submit", :class => "submit"%>
 				<% end %>
 			  </div>
 			  <div class="appstorebadge">

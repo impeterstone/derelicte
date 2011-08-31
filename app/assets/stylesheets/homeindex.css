@@ -1,5 +1,10 @@
 /* main layout styles */
 
+#noticebox {
+	display: none;
+	background: yellow;
+}
+
 body {
 	background: url("/assets/background_wood.jpg") no-repeat center center fixed;
 	-webkit-background-size: cover;
@@ -91,21 +96,27 @@ div.emailform {
 }
 
 input.email {
+	font-size: 1.5em;
     background: rgba(255,255,255,1);  
     color:  rgba(0,0,0,1);
-    width: 100%;/* 285px / 300px */
+    width: 98%;/* 285px / 300px */
     border: none;
 }
 
 input.submit {
+	font-size: 1em;
 	background: rgba(0,150,255,1);
 	width: 100%;/* 300px / 300px */
 	color: rgba(255,255,255,1);
 	border: none;
 }
 
-input.email, input.submit { 
-    padding: 7px 0px;
+input.email, input.submit {
+	font-family: 'Yanone Kaffeesatz', arial, sans-serif;
+    padding: 5px 2px 5px 4px;
+    height: 34px;
+    line-height: 1.3em;
+    margin-top: 5px;
 	-moz-box-shadow: inset 1px 2px 3px rgba(0,0,0,.5);
    	-webkit-box-shadow: inset 1px 2px 3px rgba(0,0,0,.5);
    	box-shadow: inset 1px 2px 3px rgba(0,0,0,.5);
