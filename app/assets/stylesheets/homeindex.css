@@ -76,6 +76,7 @@ div.emailform {
 	font-family: 'Yanone Kaffeesatz', arial, sans-serif;
 	font-size: 1.5em;
 	color: rgba(240,240,240,1);
+	display: none;
 }
 
 input.email {
@@ -95,6 +96,7 @@ input.submit {
 }
 
 input.email, input.submit {
+	display: none;
 	font-family: 'Yanone Kaffeesatz', arial, sans-serif;
     padding: 5px 2px 5px 4px;
     height: 38px;
@@ -187,8 +189,10 @@ span3 {
 /* image styles */
 
 img.iphone {
-   	width: 381px;
-   	height: 747px;
+	display: none;
+	top: 50px;
+	left: 70%;
+	position: absolute;
 }
 
 img.title {
@@ -206,7 +210,7 @@ img.title {
 
 /* media queries */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .blog .left, .blog .main, .blog .right {
 	float: none;
 	width: 100%;
@@ -215,4 +219,12 @@ img.title {
 	padding-top: 10%;
 	padding-bottom: 10%;
   }
+  img.iphone {
+		top: 0px;
+	left:  0px;
+	position: relative;
+  }
+  input.email {
+	width: 99%;
+}
 }
