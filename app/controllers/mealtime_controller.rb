@@ -3,18 +3,19 @@ class MealtimeController < ApplicationController
   before_filter do |controller|
     # This will set the @version variable
     controller.load_version
-    controller.force_ssl
+    # controller.force_ssl
   end
   
-  def force_ssl
-    if !request.ssl? && !Rails.env.development?
-      redirect_to :protocol => 'https://', :status => :moved_permanently
-    end
-  end
+  # def force_ssl
+  #   if !request.ssl? && !Rails.env.development?
+  #     redirect_to :protocol => 'https://', :status => :moved_permanently
+  #   end
+  # end
   
   def dump
     # Rails.logger.info request.query_parameters.inspect
-
+    puts "is ssl: #{request.ssl?}"
+    
     # We should expect this to be gzip, but it might be text
     encoding = request.headers["Content-Encoding"]
     
