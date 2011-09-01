@@ -187,6 +187,9 @@ span3 {
 /* image styles */
 
 img.iphone {
+	top: 15px;
+	right: 10px;
+	position: absolute;
    	width: 381px;
    	height: 747px;
 }
@@ -206,7 +209,7 @@ img.title {
 
 /* media queries */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .blog .left, .blog .main, .blog .right {
 	float: none;
 	width: 100%;
@@ -215,4 +218,7 @@ img.title {
 	padding-top: 10%;
 	padding-bottom: 10%;
   }
+  img.iphone {
+	position: relative;
+}
 }
