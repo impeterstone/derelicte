@@ -3,7 +3,7 @@ Derelicte::Application.routes.draw do
   match ':version/users', :to => 'user#new', :via => ["post"] # CREATE: Register new user with access_token
   
   # Mealtime
-  match ':version/mealtime', :to => 'mealtime#dump', :via => ["post"] # MealTime app client dumps go here
+  match ':version/mealtime', :to => 'mealtime#dump', :via => :post, :constraints => { :protocol => "https" } # MealTime app client dumps go here
 
   # SML Website
   match 'beta' => 'home#beta', :as => :beta

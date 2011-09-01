@@ -6,6 +6,12 @@ class MealtimeController < ApplicationController
     controller.force_ssl
   end
   
+  def force_ssl
+    if !request.ssl? && !Rails.env.development?
+      redirect_to :protocol => 'https://', :status => :moved_permanently
+    end
+  end
+  
   def dump
     # Rails.logger.info request.query_parameters.inspect
 
