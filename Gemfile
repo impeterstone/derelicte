@@ -7,6 +7,7 @@ gem 'resque'
 gem 'heroku'
 gem 'mysql2'
 gem 'rails', '3.1.0'
+gem 'rack-ssl'
 
 # App Gems
 gem 'typhoeus'
