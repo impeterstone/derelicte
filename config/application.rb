@@ -13,7 +13,6 @@ module Derelicte
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     
-    config.middleware.insert_before ActionDispatch::Static, Rack::SSL, :exclude => proc { |env| env['HTTPS'] != 'on' }
     config.force_ssl = true
 
     # Custom directories with classes and modules you want to be autoloadable.
