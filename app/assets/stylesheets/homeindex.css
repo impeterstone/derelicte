@@ -28,18 +28,8 @@ h1 {
 	padding: 0.8em 5.33333333%; /* 48px / 900px */
 }
 
-.blog .left {
+.blog .left, .blog .main, .blog .right {
 	float: left;
-	width: 33.3333333333333%; /* 300px / 900px */
-}
-
-.blog .main {
-	float: left;
-	width: 33.3333333333333%; /* 300px / 900px */
-}
-
-.blog .right {
-	float: right;
 	width: 33.3333333333333%; /* 300px / 900px */
 }
 
@@ -80,13 +70,6 @@ h1 {
 img.logo {
 	margin-top: 50px;
 	margin-left: 50px;
-}
-
-img.title {
-	display: table-cell;
-	vertical-align: middle;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 div.emailform {
@@ -137,14 +120,9 @@ input.submit:hover {
     background: rgba(0,214,37,1);
 }
 
-.appstorebadge {
-	padding-top: 20px;
-	display: none;
-}
-
 .messageunit, .recentl, .recentr {
-	margin: 0 20px;
-	padding: 0px;
+	margin: 0 auto;
+	padding: 10px 20px;
 	text-align: center;
 	min-height: 1px;
 }
@@ -160,6 +138,8 @@ ul.leftlist li, ul.rightlist li {
 	color: white;
 	text-align: center;
 }
+
+/* spans and headlines */
 
 span1 {
 	font: Calibri, Optima, Arial, sans-serif;
@@ -203,6 +183,26 @@ span3 {
 	font-size: 1em;
 	list-style: none;
 }
+
+/* image styles */
+
+img.iphone {
+   	width: 381px;
+   	height: 747px;
+}
+
+img.title {
+	display: table-cell;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.appstorebadge {
+	padding-top: 20px;
+	display: none;
+}
+
 
 /* media queries */
 
