@@ -76,6 +76,7 @@ div.emailform {
 	font-family: 'Yanone Kaffeesatz', arial, sans-serif;
 	font-size: 1.5em;
 	color: rgba(240,240,240,1);
+	display: none;
 }
 
 input.email {
@@ -95,6 +96,7 @@ input.submit {
 }
 
 input.email, input.submit {
+	display: none;
 	font-family: 'Yanone Kaffeesatz', arial, sans-serif;
     padding: 5px 2px 5px 4px;
     height: 38px;
@@ -187,11 +189,10 @@ span3 {
 /* image styles */
 
 img.iphone {
-	top: 15px;
-	right: 10px;
+	display: none;
+	top: 50px;
+	left: 70%;
 	position: absolute;
-   	width: 381px;
-   	height: 747px;
 }
 
 img.title {
@@ -219,6 +220,11 @@ img.title {
 	padding-bottom: 10%;
   }
   img.iphone {
+		top: 0px;
+	left:  0px;
 	position: relative;
+  }
+  input.email {
+	width: 99%;
 }
 }
