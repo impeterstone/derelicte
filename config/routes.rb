@@ -7,9 +7,11 @@ Derelicte::Application.routes.draw do
   # match ':version/mealtimetest', :to => 'mealtime#test', :via => ["get"] # MealTime app client dumps go here
 
   # SML Website
-  match 'beta' => 'home#beta', :as => :beta
+  match '/privacy',  :to => 'pages#privacy'
+  match '/terms', :to => 'pages#terms'
+  match '/beta', :to => 'pages#beta'
   
-  root :to => 'home#index'
+  root :to => 'pages#home'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
