@@ -29,7 +29,9 @@ class MealtimeController < ApplicationController
     end
         
     # Enqueue Job with post data
-    Resque.enqueue(DumpJob, json_data, params[:type])
+    if !params[:type].nil?
+      Resque.enqueue(DumpJob, json_data, params[:type])
+    end
     
     respond_to do |format|
       format.json  { render :json => {:status => 'success'} }
