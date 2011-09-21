@@ -7,6 +7,7 @@ class Place < ActiveRecord::Base
   def self.create_from_json(params_json)
     
     data = JSON.parse params_json
+    puts "data: #{data.inspect}"
     # created_at = Time.now.utc.to_s(:db)
     #     updated_at = Time.now.utc.to_s(:db)
     
