@@ -31,7 +31,7 @@ class Place < ActiveRecord::Base
     biz = place['bizDetails']['bizSafe']
     bizdetails = JSON.generate place['bizDetails']
     
-    snippets = place['snippets'].join(',')
+    snippets = place['snippets'].join('|')
     
     hours = place['hours'].join(',')
     address = biz['formatted_address'].join(' ')

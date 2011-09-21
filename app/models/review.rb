@@ -18,22 +18,16 @@ class Review < ActiveRecord::Base
     # qresult = ActiveRecord::Base.connection.execute(query)
     
     
-    data = JSON.parse params_json
+    dump = JSON.parse params_json
+    reviews = dump['data']
+    
     columns = [:biz, :srid, :rating, :comment, :date]
     values = []
     data['reviews'].each do |review|
-      # review_hash = {}
-      # review_hash['biz'] = row['biz']
-      # review_hash['srid'] = review['srid']
-      # review_hash['rating'] = review['rating']
-      # review_hash['comment'] = review['comment']
-      # review_hash['date'] = review['date']
-      # review_json = JSON.generate review_hash
-      review['biz'] = data['biz']
-      values << [data['biz'], review['srid'], review['rating'], review['comment'], review['date']]
+      values << [dump['biz'], review['srid'], review['rating'], review['comment'], review['date']]
     end
 
-    Review.import columns, values, :on_duplicate_key_update => [:biz, :rating, :comment, :date]
+    Review.import columns, values, :on_duplicate_key_update => [:rating, :comment, :date]
     
   end
   
