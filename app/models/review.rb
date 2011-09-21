@@ -23,7 +23,7 @@ class Review < ActiveRecord::Base
     
     columns = [:biz, :srid, :rating, :comment, :date]
     values = []
-    data['reviews'].each do |review|
+    reviews.each do |review|
       values << [dump['biz'], review['srid'], review['rating'], review['comment'], review['date']]
     end
 
