@@ -24,7 +24,7 @@ class Review < ActiveRecord::Base
     columns = [:biz, :srid, :rating, :comment, :date]
     values = []
     reviews.each do |review|
-      values << [dump['biz'], review['srid'], review['rating'], review['comment'], review['date']]
+      values << [dump['biz'], review['srid'], review['rating'].to_f, review['comment'], review['date']]
     end
 
     Review.import columns, values, :on_duplicate_key_update => [:rating, :comment, :date]
