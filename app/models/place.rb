@@ -6,8 +6,8 @@ class Place < ActiveRecord::Base
   
   def self.create_from_json(params_json)
     
-    data = JSON.parse params_json
-    puts "data: #{data.inspect}"
+    place = JSON.parse params_json
+
     # created_at = Time.now.utc.to_s(:db)
     #     updated_at = Time.now.utc.to_s(:db)
     
@@ -25,27 +25,27 @@ class Place < ActiveRecord::Base
     photo_columns = [:biz, :src, :caption]
     place_values = []
     photo_values = []
-    data['places'].each do |place|
-      # Get Place
-      biz = place['bizDetails']['bizSafe']
-      
-      hours = place['hours'].join(' ')
-      address = biz['formatted_address'].join(' ')
-      street = biz['address1']
-      city = biz['city']
-      state = biz['state']
-      zip = biz['zip']
-      country = biz['country']
-      latitude = biz['latitude']
-      longitude = biz['longitude']
-      
-      place_values << [place['biz'], place['name'], place['score'], place['rating'], place['phone'], place['price'], place['category'], place['numphotos'], place['numreviews'], hours, address, street, city, state, zip, country, latitude, longitude]
-      
-      # Get Photos
-      place['photos'].each do |photo|
-        photo_values << [place['biz'], photo['src'], photo['caption']]
-      end
+
+    # Get Place Biz Details
+    biz = place['bizDetails']['bizSafe']
+    
+    hours = place['hours'].join(' ')
+    address = biz['formatted_address'].join(' ')
+    street = biz['address1']
+    city = biz['city']
+    state = biz['state']
+    zip = biz['zip']
+    country = biz['country']
+    latitude = biz['latitude']
+    longitude = biz['longitude']
+    
+    place_values << [place['biz'], place['name'], place['score'], place['rating'], place['phone'], place['price'], place['category'], place['numphotos'], place['numreviews'], hours, address, street, city, state, zip, country, latitude, longitude]
+    
+    # Get Photos
+    place['photos'].each do |photo|
+      photo_values << [place['biz'], photo['src'], photo['caption']]
     end
+
     Place.import place_columns, place_values, :on_duplicate_key_update => [:name, :score, :rating, :phone, :price, :category, :numphotos, :numreviews, :hours, :address, :street, :city, :state, :zip, :country, :latitude, :longitude]
     Photo.import photo_columns, photo_values, :on_duplicate_key_update => [:src, :caption]
     
