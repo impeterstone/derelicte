@@ -19,7 +19,7 @@ class Review < ActiveRecord::Base
     
     
     dump = JSON.parse params_json
-    reviews = dump['data']
+    reviews = dump['data']['reviews']
     
     columns = [:biz, :srid, :rating, :comment, :date]
     values = []
