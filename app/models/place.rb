@@ -30,10 +30,14 @@ class Place < ActiveRecord::Base
     # Get Place Biz Details
     biz = place['bizDetails']['bizSafe']
     bizdetails = JSON.generate place['bizDetails']
+
+    if !place['snippets'].nil?    
+      snippets = place['snippets'].join('|')
+    end
     
-    snippets = place['snippets'].join('|')
-    
-    hours = place['hours'].join(',')
+    if !place['hours'].nil?
+      hours = place['hours'].join(',')
+    end
     address = biz['formatted_address'].join(' ')
     street = biz['address1']
     city = biz['city']
