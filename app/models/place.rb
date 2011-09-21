@@ -6,7 +6,8 @@ class Place < ActiveRecord::Base
   
   def self.create_from_json(params_json)
     
-    place = JSON.parse params_json
+    dump = JSON.parse params_json
+    place = dump['data']
 
     # created_at = Time.now.utc.to_s(:db)
     #     updated_at = Time.now.utc.to_s(:db)
