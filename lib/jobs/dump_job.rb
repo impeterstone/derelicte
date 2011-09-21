@@ -1,9 +1,9 @@
 class DumpJob < ActiveRecord::Base
   @queue = :dump_job
   
-  def self.perform(json_data)
+  def self.perform(json_data, type)
     begin
-      puts "dump job!"
+      puts "dump job with type: #{type}!"
       parsed_data = JSON.parse(json_data)
       
       query = "
@@ -13,17 +13,11 @@ class DumpJob < ActiveRecord::Base
       qresult = self.execute_sql([query, json_data])
       
       ### BEGIN SYNC CALL ###
-      row = parsed_data
       
-      if row['type']=='biz'
-        row['data']['biz'] = row['biz']
-        place_json = JSON.generate row['data']
-        Place.create_from_json(place_json)
-        row['timestamp']
-      elsif row['type']=='reviews'
-        row['data']['biz'] = row['biz']
-        review_json = JSON.generate row['data']
-        Review.create_from_json(review_json)
+      if type == 'biz'
+        Place.create_from_json(json_data)
+      elsif type == 'reviews'
+        Review.create_from_json(json_data)
       else
         # ignore unknown response
       end

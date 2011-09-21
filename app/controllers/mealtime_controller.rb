@@ -14,6 +14,7 @@ class MealtimeController < ApplicationController
   
   def dump
     # Rails.logger.info request.query_parameters.inspect
+    puts "type: #{params[:type]}"
     puts "is ssl: #{request.ssl?}"
     
     # We should expect this to be gzip, but it might be text
@@ -28,7 +29,7 @@ class MealtimeController < ApplicationController
     end
         
     # Enqueue Job with post data
-    Resque.enqueue(DumpJob, json_data)
+    Resque.enqueue(DumpJob, json_data, params[:type])
     
     respond_to do |format|
       format.json  { render :json => {:status => 'success'} }
