@@ -20,47 +20,22 @@ class Place < ActiveRecord::Base
     # query = sanitize_sql_array([query, place['biz'], place['name'], place['score'], place['phone'], place['numreviews'], place['price'], place['category'], created_at, updated_at])
     # qresult = ActiveRecord::Base.connection.execute(query)
     
-    columns = [:biz, :name, :score, :rating, :phone, :numreviews, :price, :category]
-    values = []
+    place_columns = [:biz, :name, :latitude, :longitude, :score, :rating, :phone, :price, :numphotos, :numreviews, :category, :address, :hours]
+    photo_columns = [:biz, :src, :caption]
+    place_values = []
+    photo_values = []
     data['places'].each do |place|
-      values << [place['biz'], place['name'], place['score'], place['rating'], place['phone'], place['numreviews'], place['price'], place['category']]
+      # Get Place
+      address = place['address'].join(' ')
+      hours = place['hours'].join(' ')
+      place_values << [place['biz'], place['name'], place['latitude'], place['longitude'], place['score'], place['rating'], place['phone'], place['price'], place['numphotos'], place['numreviews'], place['category'], address, hours]
+      # Get Photos
+      place['photos'].each do |photo|
+        photo_values << [place['biz'], photo['src'], photo['caption']]
+      end
     end
-    Place.import columns, values, :on_duplicate_key_update => [:name, :score, :rating, :phone, :numreviews, :price, :category]
-    
-  end
-  
-  def self.create_from_biz_json(params_json)
-    
-    place = JSON.parse params_json
-    # created_at = Time.now.utc.to_s(:db)
-    # updated_at = Time.now.utc.to_s(:db)
-    # # id, biz, name, rating, phone, numreviews, price, category, city, country, address, latitude, longitude, hours, numphotos, score, bizinfo, snippets, created_at, updated_at
-    # 
-    # # biz, city, zip, longitude, state, latitude, country
-    # address = ""
-    # place['address'].each do |row|
-    #   address += row+" "
-    # end
-    # 
-    # bizDetails_json = JSON.generate place['bizDetails']
-    # 
-    # query = "
-    #   REPLACE INTO places (biz, address, city, state, zip, longitude, latitude, country, bizinfo, created_at, updated_at)
-    #   VALUES (?,?,?,?,?,?,?,?,?,?,?)
-    # "
-    # query = sanitize_sql_array([query, place['biz'], address, place['city'], place['state'], place['zip'], place['longitude'], place['latitude'], place['country'], bizDetails_json, created_at, updated_at])
-    # qresult = ActiveRecord::Base.connection.execute(query)
-    
-    columns = [:biz, :address, :city, :state, :zip, :longitude, :latitude, :country, :bizinfo]
-    values = []
-    bizDetails_json = JSON.generate place['bizDetails']
-    address = ""
-    place['address'].each do |row|
-      address += row+" "
-    end
-    values << [place['biz'], address, place['city'], place['state'], place['zip'], place['longitude'], place['latitude'], place['country'], bizDetails_json]
-
-    Place.import columns, values, :on_duplicate_key_update => [:address, :city, :state, :zip, :longitude, :latitude, :country, :bizinfo]
+    Place.import place_columns, place_values, :on_duplicate_key_update => [:name, :latitude, :longitude, :score, :rating, :phone, :price, :numphotos, :numreviews, :category, :address, :hours]
+    Photo.import photo_columns, photo_values, :on_duplicate_key_update => [:src, :caption]
     
   end
   

@@ -15,19 +15,10 @@ class DumpJob < ActiveRecord::Base
       ### BEGIN SYNC CALL ###
       row = parsed_data
       
-      if row['type']=='places'
+      if row['type']=='biz'
+        row['data']['biz'] = row['biz']
         place_json = JSON.generate row['data']
         Place.create_from_json(place_json)
-      elsif row['type']=='photos'
-        row['biz']
-        row['numphotos']
-        row['data']['biz'] = row['biz']
-        photo_json = JSON.generate row['data']
-        Photo.create_from_json(photo_json)
-      elsif row['type']=='biz'
-        row['data']['biz'] = row['biz']
-        place_json = JSON.generate row['data']
-        Place.create_from_biz_json(place_json)
         row['timestamp']
       elsif row['type']=='reviews'
         row['data']['biz'] = row['biz']
