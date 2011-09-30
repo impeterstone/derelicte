@@ -22,7 +22,7 @@ class Place < ActiveRecord::Base
     # query = sanitize_sql_array([query, place['biz'], place['name'], place['score'], place['phone'], place['numreviews'], place['price'], place['category'], created_at, updated_at])
     # qresult = ActiveRecord::Base.connection.execute(query)
     
-    place_columns = [:biz, :name, :score, :rating, :phone, :price, :category, :numphotos, :numreviews, :hours, :address, :street, :city, :state, :zip, :country, :latitude, :longitude, :snippets, :bizdetails]
+    place_columns = [:biz, :alias, :name, :score, :rating, :phone, :price, :category, :numphotos, :numreviews, :hours, :address, :street, :city, :state, :zip, :country, :latitude, :longitude, :coverphoto, :snippets, :bizdetails]
     photo_columns = [:biz, :src, :caption]
     place_values = []
     photo_values = []
@@ -30,7 +30,7 @@ class Place < ActiveRecord::Base
     # Get Place Biz Details
     # biz = place['bizDetails']['bizSafe']
     # bizdetails = JSON.generate place['bizDetails']
-    bizdetails = place['alias']
+    bizdetails = ''
 
     if !place['snippets'].nil?    
       snippets = place['snippets'].join('|')
@@ -55,7 +55,7 @@ class Place < ActiveRecord::Base
     longitude = place['longitude']
     
     
-    place_values << [place['biz'], place['name'], place['score'], place['rating'], place['phoneString'], place['price'], place['category'], place['numPhotos'], place['numReviews'], hours, address, street, city, state, zip, country, latitude, longitude, snippets, bizdetails]
+    place_values << [place['biz'], place['alias'], place['name'], place['score'], place['rating'], place['phoneString'], place['price'], place['category'], place['numPhotos'], place['numReviews'], hours, address, street, city, state, zip, country, latitude, longitude, place['coverPhoto'], snippets, bizdetails]
     
     # Get Photos
     place['photos'].each do |photo|
