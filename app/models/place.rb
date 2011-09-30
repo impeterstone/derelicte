@@ -28,8 +28,9 @@ class Place < ActiveRecord::Base
     photo_values = []
 
     # Get Place Biz Details
-    biz = place['bizDetails']['bizSafe']
-    bizdetails = JSON.generate place['bizDetails']
+    # biz = place['bizDetails']['bizSafe']
+    # bizdetails = JSON.generate place['bizDetails']
+    bizdetails = place['alias']
 
     if !place['snippets'].nil?    
       snippets = place['snippets'].join('|')
@@ -38,17 +39,23 @@ class Place < ActiveRecord::Base
     if !place['hours'].nil?
       hours = place['hours'].join(',')
     end
-    address = biz['formatted_address'].join(' ')
-    street = biz['address1']
-    city = biz['city']
-    state = biz['state']
-    zip = biz['zip']
-    country = biz['country']
-    latitude = biz['latitude']
-    longitude = biz['longitude']
+
+    # street = biz['address1']
+    # city = biz['city']
+    # state = biz['state']
+    # zip = biz['zip']
+    # country = biz['country']
+    street = ''
+    city = ''
+    state = ''
+    zip = ''
+    country = ''
+    address = place['formattedAddress']
+    latitude = place['latitude']
+    longitude = place['longitude']
     
     
-    place_values << [place['biz'], place['name'], place['score'], place['rating'], place['phone'], place['price'], place['category'], place['numphotos'], place['numreviews'], hours, address, street, city, state, zip, country, latitude, longitude, snippets, bizdetails]
+    place_values << [place['biz'], place['name'], place['score'], place['rating'], place['phoneString'], place['price'], place['category'], place['numPhotos'], place['numReviews'], hours, address, street, city, state, zip, country, latitude, longitude, snippets, bizdetails]
     
     # Get Photos
     place['photos'].each do |photo|
