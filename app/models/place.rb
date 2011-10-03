@@ -22,7 +22,7 @@ class Place < ActiveRecord::Base
     # query = sanitize_sql_array([query, place['biz'], place['name'], place['score'], place['phone'], place['numreviews'], place['price'], place['category'], created_at, updated_at])
     # qresult = ActiveRecord::Base.connection.execute(query)
     
-    place_columns = [:biz, :alias, :name, :score, :rating, :phone, :price, :category, :numphotos, :numreviews, :hours, :address, :street, :city, :state, :zip, :country, :latitude, :longitude, :coverphoto, :snippets, :bizdetails]
+    place_columns = [:biz, :alias, :name, :score, :rating, :phone, :price, :category, :num_photos, :num_reviews, :cover_photo, :latitude, :longitude, :hours, :address, :city, :zip, :country]
     photo_columns = [:biz, :src, :caption]
     place_values = []
     photo_values = []
@@ -30,41 +30,53 @@ class Place < ActiveRecord::Base
     # Get Place Biz Details
     # biz = place['bizDetails']['bizSafe']
     # bizdetails = JSON.generate place['bizDetails']
-    bizdetails = ''
-
-    if !place['snippets'].nil?    
-      snippets = place['snippets'].join('|')
-    end
+    # bizdetails = ''
     
-    if !place['hours'].nil?
-      hours = place['hours'].join(',')
-    end
-
-    # street = biz['address1']
-    # city = biz['city']
-    # state = biz['state']
-    # zip = biz['zip']
-    # country = biz['country']
-    street = ''
-    city = ''
-    state = ''
-    zip = ''
-    country = ''
-    address = place['formattedAddress']
+    biz = place['biz']
+    p_alias = place['alias']
+    name = place['name']
+    score = place['score']
+    rating = place['rating']
+    phone = place['formattedPhone']
+    price = place['price']
+    category = place['category']
+    num_photos = place['numPhotos']
+    num_reviews = place['numReviews']
+    cover_photo = place['coverPhoto']
     latitude = place['latitude']
     longitude = place['longitude']
+
+    if !place['hours'].nil?
+      hours = place['hours'].join(',')
+    else
+      hours = nil
+    end
     
+    address = place['formattedAddress']
     
-    place_values << [place['biz'], place['alias'], place['name'], place['score'], place['rating'], place['phoneString'], place['price'], place['category'], place['numPhotos'], place['numReviews'], hours, address, street, city, state, zip, country, latitude, longitude, place['coverPhoto'], snippets, bizdetails]
+    attrs = place['attrs']
+    if !attrs.nil?
+      city = attrs['city']
+      zip = attrs['zipcode']
+      country = attrs['country']
+    else
+      city = nil
+      zip = nil
+      country = nil
+    end
+    
+    place_values << [biz, p_alias, name, score, rating, phone, price, category, num_photos, num_reviews, cover_photo, latitude, longitude, hours, address, city, zip, country]
+    Place.import place_columns, place_values, :on_duplicate_key_update => [:name, :score, :rating, :phone, :price, :category, :num_photos, :num_reviews, :cover_photo, :latitude, :longitude, :hours, :address, :city, :zip, :country]
     
     # Get Photos
-    place['photos'].each do |photo|
-      photo_values << [place['biz'], photo['src'], photo['caption']]
+    photos = place['photos']
+    if !photos.nil?
+      place['photos'].each do |photo|
+        photo_values << [place['biz'], photo['src'], photo['caption']]
+      end
+      Photo.import photo_columns, photo_values, :on_duplicate_key_update => [:src, :caption]
     end
 
-    Place.import place_columns, place_values, :on_duplicate_key_update => [:name, :score, :rating, :phone, :price, :category, :numphotos, :numreviews, :hours, :address, :street, :city, :state, :zip, :country, :latitude, :longitude, :snippets, :bizdetails]
-    Photo.import photo_columns, photo_values, :on_duplicate_key_update => [:src, :caption]
-    
   end
   
   def self.create_from_biz_json(params_json)
