@@ -6,7 +6,7 @@ gem 'clockwork'
 gem 'resque'
 gem 'heroku'
 gem 'mysql2'
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.1'
 
 # App Gems
 gem 'typhoeus'
