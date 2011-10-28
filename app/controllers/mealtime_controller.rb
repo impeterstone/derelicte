@@ -30,12 +30,12 @@ class MealtimeController < ApplicationController
     # Build URL
     path = "/v2/search?category_filter=#{cflt}&sort=#{sort}&radius_filter=#{radius}&offset=#{offset}&limit=#{limit}"
     if !term.nil?
-      path += "&term=#{term}"
+      path += "&term=#{CGI::escape(term)}"
     end
     if !ll.nil?
       path += "&ll=#{ll}"
     elsif !location.nil?
-      path += "&location=#{location}"
+      path += "&location=#{CGI::escape(location)}"
     else
       path += "&ll=37.32798,-122.01382" # default to Cupertino, CA
     end
