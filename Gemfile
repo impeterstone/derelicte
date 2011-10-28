@@ -6,6 +6,7 @@ gem 'clockwork'
 gem 'resque'
 gem 'heroku'
 gem 'mysql2'
+gem 'oauth'
 gem 'rails', '3.1.1'
 
 # App Gems

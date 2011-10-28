@@ -3,6 +3,9 @@ Derelicte::Application.routes.draw do
   match ':version/users', :to => 'user#new', :via => ["post"] # CREATE: Register new user with access_token
   
   # Mealtime
+  match ':version/search', :to => 'mealtime#search', :via => ["get"]
+  match ':version/business/:yid', :to => 'mealtime#business', :via => ["get"]
+  
   match ':version/mealtime', :to => 'mealtime#dump', :via => ["post"] # MealTime app client dumps go here
   # match ':version/mealtimetest', :to => 'mealtime#test', :via => ["get"] # MealTime app client dumps go here
 
