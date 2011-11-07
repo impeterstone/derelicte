@@ -49,18 +49,29 @@ class MealtimeController < ApplicationController
     output = JSON.parse(res)
     
     total = output["total"]
+    showing = total
     businesses = output["businesses"] # array
     
     places_array = []
     businesses.each do |b|
       puts "\n\nBiz: #{b.inspect}\n\n"
-      p = {}
+      
+      # If no cover photo, don't include this in response
+      if b["image_url"].nil?
+        showing -= 1
+        next
+      end
+      
+      p = {} # place hash
+      
       p["biz"] = b["mobile_url"].sub("http://m.yelp.com/biz/","") # strip the mobile url to get biz
       p["cover_photo"] = !b["image_url"].nil? ? b["image_url"].sub("ms.jpg","l.jpg") : "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/I-404.svg/200px-I-404.svg.png" # image_url can be nil
       p["rating"] = b["rating"]
       p["name"] = b["name"]
       p["yid"] = b["id"]
       p["review_count"] = b["review_count"]
+      
+      p["rating_img_url"] = b["rating_img_url_large"]
       
       # Categories is an array of arrays, each one having the display text and the identifier as elements
       cat_array = []
@@ -84,6 +95,7 @@ class MealtimeController < ApplicationController
     end
     
     response = {}
+    response["showing"] = showing
     response["total"] = total
     response["places"] = places_array
     
