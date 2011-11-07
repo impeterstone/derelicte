@@ -22,7 +22,7 @@ class MealtimeController < ApplicationController
     ll = !params[:ll].nil? ? params[:ll] : nil # lat,lng - takes precedence over location
     location = !params[:location].nil? ? params[:location] : nil # city, address, neighborhood
     sort = !params[:sort].nil? ? params[:sort] : 0 # 0 - best match, 1 - distance, 2 - rating
-    cflt = !params[:cflt].nil? ? params[:cflt] : "food,bars" # category filter
+    cflt = !params[:cflt].nil? ? params[:cflt] : "restaurants,bars" # category filter
     radius = !params[:radius].nil? ? params[:radius] : "3218" # meters, default 2 miles
     offset = !params[:offset].nil? ? params[:offset] : 0
     limit = !params[:limit].nil? ? params[:limit] : 20
