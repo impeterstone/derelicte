@@ -23,7 +23,7 @@ class MealtimeController < ApplicationController
     location = !params[:location].nil? ? params[:location] : nil # city, address, neighborhood
     sort = !params[:sort].nil? ? params[:sort] : 0 # 0 - best match, 1 - distance, 2 - rating
     cflt = !params[:cflt].nil? ? params[:cflt] : "restaurants,bars" # category filter
-    radius = !params[:radius].nil? ? params[:radius] : "3218" # meters, default 2 miles
+    radius = !params[:radius].nil? ? params[:radius] : 3218 # meters, default 2 miles
     offset = !params[:offset].nil? ? params[:offset] : 0
     limit = !params[:limit].nil? ? params[:limit] : 20
     
@@ -48,7 +48,12 @@ class MealtimeController < ApplicationController
     res = access_token.get(path).body
     output = JSON.parse(res)
     
-    total = output["total"]
+    if !output["total"].nil?
+      total = output["total"]
+    else
+      total = 0
+    end
+    
     showing = total
     businesses = output["businesses"] # array
     
